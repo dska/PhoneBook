@@ -16,6 +16,7 @@ namespace PhoneBookClient.CodeFiles
 
         protected bool ShowError { get; set; } // show error alert
         protected string? ErrorMsg { get; set; } // error msg
+        protected string? ErrorTitle { get; set; } = "Error"; // error title
 
 
         [Inject]
@@ -37,6 +38,7 @@ namespace PhoneBookClient.CodeFiles
             }
             catch (Exception ex)
             {
+                ErrorTitle = "Error - GetContactList()";
                 ErrorMsg = ex.Message;
                 ShowError = true;
             }
@@ -63,6 +65,7 @@ namespace PhoneBookClient.CodeFiles
             }
             catch (Exception ex)
             {
+                ErrorTitle = "Error - DeleteContact()";
                 ErrorMsg = ex.Message;
                 ShowError = true;
             }

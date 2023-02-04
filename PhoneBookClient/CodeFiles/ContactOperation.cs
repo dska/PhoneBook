@@ -27,6 +27,7 @@ namespace PhoneBookClient.CodeFiles
 
         protected bool ShowError { get; set; } // show error alert
         protected string? ErrorMsg { get; set; } // error msg
+        protected string? ErrorTitle { get; set; } = "Error"; // error title
 
         protected async override Task OnInitializedAsync()
         {
@@ -53,6 +54,7 @@ namespace PhoneBookClient.CodeFiles
             }
             catch (Exception ex)
             {
+                ErrorTitle = "Error - GetContact()";
                 ErrorMsg = ex.Message;
                 ShowError = true;
             }
@@ -78,12 +80,14 @@ namespace PhoneBookClient.CodeFiles
                     // error during insert
                     else
                     {
+                        ErrorTitle = "Error - AddContact()";
                         ErrorMsg = response.StatusMessage;
                         ShowError = true;
                     }
                 }
                 catch (Exception ex)
                 {
+                    ErrorTitle = "Error - AddContact()";
                     ErrorMsg = ex.Message;
                     ShowError = true;
                 }
@@ -102,6 +106,7 @@ namespace PhoneBookClient.CodeFiles
                 }
                 catch (Exception ex)
                 {
+                    ErrorTitle = "Error - UpdateContact()";
                     ErrorMsg = ex.Message;
                     ShowError = true;
                 }
@@ -131,6 +136,7 @@ namespace PhoneBookClient.CodeFiles
                 }
                 catch(Exception ex)
                 {
+                    ErrorTitle = "Error - DeleteContact()";
                     ErrorMsg = ex.Message;
                     ShowError = true;
                 }

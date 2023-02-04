@@ -112,7 +112,8 @@
     @*error msg dialog*@
     @if (ShowError == true)
     {
-        <ModalDialog Title="Error"
+        <ModalDialog 
+             Title=@ErrorTitle
              MessageText=@ErrorMsg
              CloseCallback="() => {ShowError = false;}"
              ConfirmCallback="() => {ShowError = false;}"
