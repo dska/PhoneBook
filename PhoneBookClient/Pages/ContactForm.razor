@@ -1,0 +1,68 @@
+﻿@*contact form displayed after click on contact in phone book*@
+
+@using PhoneBookService;
+
+@if (Contact != null)
+{
+    
+    @*contact name in h1 with close button*@
+    <div class="d-flex w-100 justify-content-between col-sm-10">
+        <h1 style="display: inline">@Contact.FirstName @Contact.LastName</h1>
+        <small>
+            <button type="button" class="btn btn-outline-secondary" @onclick="() => {Contact = null; }">Close</button>
+        </small>
+    </div>
+
+    @*form with contact fields - readonly *@
+    <form >
+        <div class="form-group ">
+            <label for="phonenumber" class="col-sm-2 col-form-label">Phone No</label>
+            <div class="col-sm-12">
+                <input type="tel" class="form-control" id="phonenumber" aria-describedby="phonenumber" @bind="Contact.PhoneNumber" readonly>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label for="email" class="col-sm-2 col-form-label">Email address</label>
+            <div class="col-sm-12">
+                <input type="email" class="form-control" id="email" aria-describedby="email" @bind="Contact.EmailAddr" readonly>
+            </div>
+        </div>
+
+        <div class="form-group ">
+            <label for="street" class="col-sm-2 col-form-label">Street</label>
+            <div class="col-sm-12">
+                <input type="text" class="form-control" id="street" aria-describedby="street" @bind="Contact.Street" readonly>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label for="city" class="col-sm-2 col-form-label">City</label>
+            <div class="col-sm-12">
+                <input type="text" class="form-control" id="city" aria-describedby="city" @bind="Contact.City" readonly>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label for="postalcode" class="col-sm-2 col-form-label">Postal Code</label>
+            <div class="col-sm-12">
+                <input type="text" class="form-control" id="postalcode" aria-describedby="postalcode" @bind="Contact.PostalCode" readonly>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label for="country" class="col-sm-2 col-form-label">Country</label>
+            <div class="col-sm-12">
+                <input type="text" class="form-control" id="country" aria-describedby="country" @bind="Contact.Country" readonly>
+            </div>
+        </div>
+
+    </form>
+
+}
+
+@code {
+
+    // params sent from phone book to display proper contact info
+    [Parameter]
+    public int? ContactId { get; set; }
+
+    [Parameter]
+    public ContactData? Contact { get; set; }
+}

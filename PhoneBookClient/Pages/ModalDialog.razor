@@ -1,0 +1,46 @@
+﻿@*modal dialog*@
+
+<div class="modal" tabindex="-3" style="display:block;padding-top:300px" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            @*title*@
+            <div class="modal-header" style="background-color:#5c116f;color:white;height:50px">
+                <span class="modal-title">@Title</span>
+                <button type="button" class="btn-close btn-danger" @onclick="CloseCallback" aria-label="Close"></button>
+            </div>
+
+            @*message text*@
+            <div class="modal-body">
+                <p>@MessageText</p>
+            </div>
+
+            @*buttons*@
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" @onclick="CloseCallback">@CancelBtnText</button>
+                <button type="button" class="btn btn-primary" @onclick="ConfirmCallback">@ConfirmBtnText</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    // params for modal dialog to be reusable
+    [Parameter]
+    public string? Title { get; set; }
+    [Parameter]
+    public string? MessageText { get; set; }
+
+    [Parameter]
+    public EventCallback ConfirmCallback { get; set; }
+
+    [Parameter]
+    public EventCallback CloseCallback { get; set; }
+
+    [Parameter]
+    public string ConfirmBtnText { get; set; } = "Confirm";
+    [Parameter]
+    public string CancelBtnText { get; set; } = "Cancel";
+
+}

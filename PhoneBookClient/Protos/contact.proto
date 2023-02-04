@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+option csharp_namespace = "PhoneBookService";
+import "google/protobuf/empty.proto";  
+  
+package PhoneBook;  
+  
+// grpc methods for get, add, update and delete contact
+service PhoneBook {  
+    rpc GetContactList(google.protobuf.Empty) returns (ContactList);  
+    rpc GetContact(ContactQuery) returns (ContactData);  
+    rpc AddContact(ContactData) returns(ContactPostResponse);  
+    rpc UpdateContact(ContactUpdateQuery) returns(ContactPostResponse);  
+    rpc DeleteContact(ContactQuery) returns (ContactPostResponse);  
+}  
+  
+// contact fields message
+message ContactData{  
+    int32 id = 1;  
+    string last_name = 2;  
+    string first_name = 3;  
+    string phone_number = 4;  
+    string email_addr = 5;  
+    string street = 6;
+    string city = 7;
+    string postal_code = 8;
+    string country = 9;
+}  
+  
+// message for get and delete contact
+message ContactQuery {  
+    int32 id=1;  
+}  
+  
+// message to get contact list
+message ContactList {  
+    repeated ContactData contact_list = 1;  
+}  
+  
+// message to update contact
+message ContactUpdateQuery {  
+    ContactData contact = 1;  
+    int32 id = 2;  
+}  
+  
+// message for post, put and delete responses
+message ContactPostResponse {  
+    string status_message = 1;  
+    bool status = 2;  
+    int32 status_code = 3;  
+    int32 id = 4;
+} 

@@ -1,0 +1,112 @@
+﻿@*phone book page*@
+@page "/phonebook"
+
+@using PhoneBookService;
+
+@inherits PhoneBookClient.CodeFiles.PhoneBookOperation
+
+<PageTitle>Phone Book</PageTitle>
+
+@*header banner*@
+<div style="background-color:#3a0647;color:white;font-family:Calibri;font-size:x-large;font-weight:500;text-align:center;border-radius:10px">
+    Phone Book (@(contactList != null && contactList.ContactList_ != null ? @contactList.ContactList_.Count : 0) contacts)
+</div>
+<div class="container my-5">   
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="row">
+
+                @*add new contact button*@
+                <div class="col-sm-2">
+                    <a href="/contactedit/0" class="btn btn-outline-primary float-right">New</a>
+                </div>
+
+                @*search box*@
+                <div class="col-sm-10">
+                    <input @oninput="(ChangeEventArgs e) => {SearchText = (string)e.Value;}" type="text" class="form-control" id="search" aria-describedby="search" placeholder="Search...">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+        </div> 
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-4" style="overflow: auto; height:75vh">
+
+            @*constact list*@
+            @if (contactList != null && contactList.ContactList_ != null)
+            {
+                <div class="list-group">
+                    @foreach (var contact in contactList.ContactList_.Where(c => string.IsNullOrEmpty(SearchText) || c.FirstName.Contains(SearchText) || c.LastName.Contains(SearchText) || c.PhoneNumber.Contains(SearchText) || c.EmailAddr.Contains(SearchText)))
+                    {
+                        var id = contact.Id;
+                        
+                        @*constact card*@
+                        <a @onclick="@(() => {SelectedId = id; SelectedContact = contact;})" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">@contact.LastName @contact.FirstName</h5>
+
+                                @*edit delete btns*@
+                                <small>
+                                    <a href="/contactedit/@id" class="btn btn-outline-primary btn-sm mr-3">Edit</a>
+                                    <a href="/phonebook" @onclick="() => {ShowDialog = true; DeleteContactId = id;}" class="btn btn-outline-danger btn-sm">Delete</a>
+                                </small>
+                            </div>
+                            <p class="mb-1">Phone: @contact.PhoneNumber</p>
+                            <p class="mb-1">Email: @contact.EmailAddr</p>
+                        </a>
+                    }
+                </div>
+                
+                @*delete confirmation dialog*@
+                @if (ShowDialog == true)
+                {
+                    <ModalDialog Title="Delete confirmation"
+                         MessageText="Are you sure you want to delete the contact?"
+                         CloseCallback="() => {ShowDialog = false;}"
+                         ConfirmCallback="() => DeleteConfirmed(DeleteContactId)"
+                         ConfirmBtnText="Delete">
+                    </ModalDialog>
+                }
+                @if (!contactList.ContactList_.Any(c => string.IsNullOrEmpty(SearchText) || c.FirstName.Contains(SearchText) || c.LastName.Contains(SearchText) || c.PhoneNumber.Contains(SearchText) || c.EmailAddr.Contains(SearchText)))
+                {
+                    <div class="text-center">
+                        <h4 class="text-muted">No matching contacts</h4>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="text-center">
+                    <h4 class="text-muted">No Contacts</h4>
+                </div>
+            }
+        </div>
+        <div class="col-sm-8" style="overflow: auto; height:75vh; padding-left:40px">
+            @if (SelectedContact != null)
+            {
+                <ContactForm ContactId=@SelectedId Contact=@SelectedContact></ContactForm>
+            }
+        </div>
+    </div>
+</div>
+
+@*error message box*@
+@if (ShowError == true)
+{
+    <ModalDialog Title="Error"
+             MessageText=@ErrorMsg
+             CloseCallback="() => {ShowError = false;}"
+             ConfirmCallback="() => {ShowError = false;}"
+             ConfirmBtnText="Okay">
+    </ModalDialog>
+}
+
+
+
+@code {
+    
+
+}
+

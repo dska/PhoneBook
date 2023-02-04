@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcGreeterClient";
+import "google/protobuf/empty.proto";  
+  
+package PhoneBook;  
+  
+service PhoneBook {  
+    rpc GetContactList(google.protobuf.Empty) returns (ContactList);  
+    rpc GetContact(ContactQuery) returns (ContactData);  
+    rpc AddContact(ContactData) returns(ContactPostResponse);  
+    rpc UpdateContact(ContactUpdateQuery) returns(ContactPostResponse);  
+    rpc DeleteContact(ContactQuery) returns (ContactPostResponse);  
+}  
+  
+message ContactData{  
+    int32 id = 1;  
+    string last_name = 2;  
+    string first_name = 3;  
+    string phone_number = 4;  
+    string email_addr = 5;  
+    string street = 6;
+    string city = 7;
+    string postal_code = 8;
+    string country = 9;
+}  
+  
+message ContactQuery {  
+    int32 id=1;  
+}  
+  
+message ContactList {  
+    repeated ContactData contact_list = 1;  
+}  
+  
+message ContactUpdateQuery {  
+    ContactData contact = 1;  
+    int32 id = 2;  
+}  
+  
+message ContactPostResponse {  
+    string status_message = 1;  
+    bool status = 2;  
+    int32 status_code = 3;  
+    int32 id = 4;
+} 

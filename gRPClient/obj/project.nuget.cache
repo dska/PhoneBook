@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "NSbSy/C4Za5SsqI0Ox62FKV8MWOlaBkjc+Gkp1S8ZPcf/EZLVlyAMD727m1pcLaHilQa8WOEV5PfYCoWYeRHyw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\dska\\source\\repos\\PhoneBookClient\\gRPClient\\gRPClient.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dska\\.nuget\\packages\\google.protobuf\\3.21.12\\google.protobuf.3.21.12.nupkg.sha512",
+    "C:\\Users\\dska\\.nuget\\packages\\grpc.core.api\\2.51.0\\grpc.core.api.2.51.0.nupkg.sha512",
+    "C:\\Users\\dska\\.nuget\\packages\\grpc.net.client\\2.51.0\\grpc.net.client.2.51.0.nupkg.sha512",
+    "C:\\Users\\dska\\.nuget\\packages\\grpc.net.common\\2.51.0\\grpc.net.common.2.51.0.nupkg.sha512",
+    "C:\\Users\\dska\\.nuget\\packages\\grpc.tools\\2.51.0\\grpc.tools.2.51.0.nupkg.sha512",
+    "C:\\Users\\dska\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.0.3\\microsoft.extensions.logging.abstractions.3.0.3.nupkg.sha512",
+    "C:\\Users\\dska\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
+  ],
+  "logs": []
+}
