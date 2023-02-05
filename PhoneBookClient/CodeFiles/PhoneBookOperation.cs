@@ -10,7 +10,8 @@ namespace PhoneBookClient.CodeFiles
         protected ContactList? contactList;
         protected int? SelectedId { get; set; } // selected contact id, to display 
         protected ContactData? SelectedContact { get; set; } // selected contact to display
-        protected string? SearchText { get; set; }
+        private string? _searchText;
+        protected string? SearchText { get { return _searchText != null ? _searchText.ToLower() : ""; } set { _searchText = value; } }
         protected bool ShowDialog { get; set; } // show delete confirmation dialog
         protected int DeleteContactId { get; set; }
 

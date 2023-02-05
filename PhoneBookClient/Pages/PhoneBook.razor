@@ -38,7 +38,7 @@
             @if (contactList != null && contactList.ContactList_ != null)
             {
                 <div class="list-group">
-                    @foreach (var contact in contactList.ContactList_.Where(c => string.IsNullOrEmpty(SearchText) || c.FirstName.Contains(SearchText) || c.LastName.Contains(SearchText) || c.PhoneNumber.Contains(SearchText) || c.EmailAddr.Contains(SearchText)))
+                    @foreach (var contact in contactList.ContactList_.Where(c => string.IsNullOrEmpty(SearchText) || c.FirstName.ToLower().Contains(SearchText) || c.LastName.ToLower().Contains(SearchText) || c.PhoneNumber.ToLower().Contains(SearchText) || c.EmailAddr.ToLower().Contains(SearchText)))
                     {
                         var id = contact.Id;
                         
@@ -69,7 +69,7 @@
                          ConfirmBtnText="Delete">
                     </ModalDialog>
                 }
-                @if (!contactList.ContactList_.Any(c => string.IsNullOrEmpty(SearchText) || c.FirstName.Contains(SearchText) || c.LastName.Contains(SearchText) || c.PhoneNumber.Contains(SearchText) || c.EmailAddr.Contains(SearchText)))
+                @if (!contactList.ContactList_.Any(c => string.IsNullOrEmpty(SearchText) || c.FirstName.ToLower().Contains(SearchText) || c.LastName.ToLower().Contains(SearchText) || c.PhoneNumber.ToLower().Contains(SearchText) || c.EmailAddr.ToLower().Contains(SearchText)))
                 {
                     <div class="text-center">
                         <h4 class="text-muted">No matching contacts</h4>
